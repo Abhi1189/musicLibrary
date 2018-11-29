@@ -20,45 +20,31 @@ var library = {
                       name: "Other Playlist",
                       tracks: ["t03"]
                     }
-             }
-}
+             },
 
-// FUNCTIONS TO IMPLEMENT:
 
-// prints a list of all playlists, in the form:
-// p01: Coding Music - 2 tracks
-// p02: Other Playlist - 1 tracks
+             uid: function() {
+              return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            },
 
-var printPlaylists = function () {
+            
+  printPlaylists: function() {
        for(var i in library.playlists){
               console.log(i + ': ' + library.playlists[i].name 
               + ' - ' + library.playlists[i].tracks.length +
               ' tracks');
        }
-}
-// printPlaylists();
+  },
 
-// prints a list of all tracks, in the form:
-// t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
-// t02: Model View Controller by James Dempsey (WWDC 2003)
-// t03: Four Thirty-Three by John Cage (Woodstock 1952)
-
-var printTracks = function () {
+  printTracks: function () {
        for(var i in library.tracks){
               console.log(i + ": " + library.tracks[i].name 
               + ' by ' + library.tracks[i].artist + " (" + 
               library.tracks[i].album + ") ");
        }
-}
-// printTracks();
+  },
 
-
-// prints a list of tracks for a given playlist, in the form:
-// p01: Coding Music - 2 tracks
-// t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
-// t02: Model View Controller by James Dempsey (WWDC 2003)
-
-var printPlaylist = function (playlistId) {
+  printPlaylist: function (playlistId) {
        console.log(playlistId + ': ' + library.playlists[playlistId].name
        + ' - ' + library.playlists[playlistId].tracks.length + ' tracks');
 
@@ -71,49 +57,83 @@ var printPlaylist = function (playlistId) {
        }
      
 
-}
-// printPlaylist("p01");
+  },
 
-// adds an existing track to an existing playlist
-
-var addTrackToPlaylist = function (trackId, playlistId) {
+  addTrackToPlaylist: function (trackId, playlistId) {
        library.playlists[playlistId].tracks.push(trackId);
        console.log(library.playlists[playlistId].tracks);
-}
-// addTrackToPlaylist("t03", "p01")
+  },
 
-// generates a unique id
-// (use this for addTrack and addPlaylist)
-
-var uid = function() {
-  return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-}
-
-
-// adds a track to the library
-
-var addTrack = function (name, artist, album) {
-       let newtrack = uid();
+  addTrack: function (name, artist, album) {
+       let newtrack = this.uid();
        library.tracks[newtrack] = {"id": newtrack,
                                    name: name,
                                    artist: artist,
                                    album: album
                                   };
        console.log(library.tracks);
+  },
+
+  addPlaylist: function (name) {
+       let newPlaylist = this.uid();
+       library.playlists[newPlaylist] = {id: newPlaylist,
+                                         name: name,
+                                         tracks: [this.uid()]
+                                        };
+       console.log(library.playlists);
+  }
+
 }
+library.addPlaylist("abhi");
+// FUNCTIONS TO IMPLEMENT:
+
+// prints a list of all playlists, in the form:
+// p01: Coding Music - 2 tracks
+// p02: Other Playlist - 1 tracks
+
+// var printPlaylists = function () {
+//        for(var i in library.playlists){
+//               console.log(i + ': ' + library.playlists[i].name 
+//               + ' - ' + library.playlists[i].tracks.length +
+//               ' tracks');
+//        }
+// }
+// printPlaylists();
+
+// prints a list of all tracks, in the form:
+// t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
+// t02: Model View Controller by James Dempsey (WWDC 2003)
+// t03: Four Thirty-Three by John Cage (Woodstock 1952)
+
+
+// printTracks();
+
+
+// prints a list of tracks for a given playlist, in the form:
+// p01: Coding Music - 2 tracks
+// t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
+// t02: Model View Controller by James Dempsey (WWDC 2003)
+
+
+// printPlaylist("p01");
+
+// adds an existing track to an existing playlist
+
+
+// addTrackToPlaylist("t03", "p01")
+
+// generates a unique id
+// (use this for addTrack and addPlaylist)
+
+
+
+// adds a track to the library
+
 // addTrack("abhi", "hello", "hello there");
 
 // adds a playlist to the library
 
-var addPlaylist = function (name) {
-       let newPlaylist = uid();
-       library.playlists[newPlaylist] = {id: newPlaylist,
-                                         name: name,
-                                         tracks: [uid()]
-                                        };
-       console.log(library.playlists);
-}
-addPlaylist("abhi");
+// addPlaylist("abhi");
 
 
 // STRETCH:
